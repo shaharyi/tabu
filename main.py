@@ -70,6 +70,10 @@ def location_score(s):
 
 
 def friend_foe_score(s):
+    global data
+    friend = data.filter(items=[f'Friend{x}' for x in (1, 2, 3)])
+    foe = data.filter(items=[f'Enemy{x}' for x in (1, 2, 3)])
+
     return 0
 
 

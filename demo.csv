@@ -1,0 +1,92 @@
+,Student Name,Student #,Gender,Location,Friend1,Friend2,Friend3,Friend4,Friend5,Enemy1,Enemy1_Importance,Enemy2,Enemy2_Importance,Enemy3,Enemy3_Importance,Enemy4,Enemy4_Importance,Enemy5,Enemy5_Importance,TeacherRequest1,TeacherRequest1_Importance,TeacherRequest2,TeacherRequest2_Importance,TeacherRequest3,TeacherRequest3_Importance,TeacherRequest4,TeacherRequest4_Importance,TeacherRequest5,TeacherRequest5_Importance,Class 1 OK,Class 2 OK,Class 3 OK,Class 4 OK,Not all classes OK,Teacher Placement Important,TroubleMaker,Grades,Comments,Parent Comments,Unnamed: 39,Unnamed: 40,Unnamed: 41,Unnamed: 42,No Requests,Unnamed: 44,Unnamed: 45,FriendNotValid1,FriendNotValid2,FriendNotValid3,FriendNotValid4,FriendNotValid5,EnemyNotValid1,EnemyNotValid2,EnemyNotValid3,EnemyNotValid4,EnemyNotValid5,TeacherRequestNotValid1,TeacherRequestNotValid2,TeacherRequestNotValid3,TeacherRequestNotValid4,TeacherRequestNotValid5,Unnamed: 61,HasTeacherRec1,HasTeacherRec2,HasTeacherRec3,HasTeacherRec4,HasTeacherRec5,Unnamed: 67,TeachRec1High,TeachRec2High,TeachRec3High,TeachRec4High,TeachRec5High
+0,Student1,1,M,Manhattan,Student47,Student66,Student60,Student52,,Student84,2,Student78,1,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,1,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+1,Student2,2,F,Manhattan,Student44,Student26,Student40,Student27,,Student44,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+2,Student3,3,F,Riverdale/Bronx/Yonkers,Student81,Student88,Student29,,,Student84,2,,2,,2,,2,,2,Student81,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+3,Student4,4,M,White Plains,Student82,Student58,Student39,Student52,,,2,,2,,2,,2,,2,Student10,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+4,Student5,5,F,Riverdale/Bronx/Yonkers,Student25,Student45,Student41,,,,2,,2,,2,,2,,2,Student25,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+5,Student6,6,M,White Plains,Student49,Student39,Student57,Student18,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+6,Student7,7,M,New Rochelle,Student74,Student51,Student54,Student82,,Student66,1,,2,,2,,2,,2,,2,,2,,2,,2,,2,0,0,1,0,1,1,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+7,Student8,8,M,New Rochelle,Student85,Student74,Student16,,,Student74,1,Student1,2,Student84,2,,2,,2,,2,,2,,2,,2,,2,0,1,0,0,1,1,1,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+8,Student9,9,F,New Rochelle,Student33,Student83,Student59,Student26,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+9,Student10,10,M,White Plains,Student55,Student74,Student4,Student43,,,2,,2,,2,,2,,2,Student4,1,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,1,2,2,2,2
+10,Student11,11,M,New Rochelle,Student57,Student42,Student52,Student82,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,0,1,0,0,1,1,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+11,Student12,12,F,Riverdale/Bronx/Yonkers,Student3,Student34,Student86,Student17,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+12,Student13,13,F,Manhattan,Student79,Student87,Student32,Student75,,Student2,2,,2,,2,,2,,2,Student79,2,Student32,2,Student87,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,1,0,0,,2,2,2,2,2
+13,Student14,14,M,Manhattan,Student18,Student22,,,,Student72,2,Student78,1,,2,,2,,2,,2,,2,,2,,2,,2,1,0,0,0,1,1,1,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+14,Student15,15,F,Riverdale/Bronx/Yonkers,Student17,Student12,Student45,Student79,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+15,Student16,16,M,New Rochelle,,,,,,Student66,1,Student84,1,Student1,2,,2,,2,Student42,1,Student82,1,Student58,1,,2,,2,1,1,1,1,0,0,0,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,1,0,0,,1,1,1,2,2
+16,Student17,17,F,Riverdale/Bronx/Yonkers,Student86,Student12,Student3,Student81,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+17,Student18,18,M,Manhattan,Student57,Student49,Student6,Student14,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,0,1,1,1,1,0,0,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+18,Student19,19,F,Riverdale/Bronx/Yonkers,Student5,Student38,Student63,,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+19,Student20,20,M,Riverdale/Bronx/Yonkers,Student39,Student28,Student6,,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,0,1,1,1,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+20,Student21,21,M,Manhattan,Student91,Student37,Student65,Student30,,Student72,2,Student18,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+21,Student22,22,M,Riverdale/Bronx/Yonkers,Student14,Student65,Student89,Student43,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+22,Student23,23,F,New Rochelle,Student83,Student9,Student33,Student40,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+23,Student24,24,M,Other,Student65,Student74,Student82,Student91,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,0,1,0,0,1,1,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+24,Student25,25,F,Manhattan,Student5,Student44,Student27,,,,2,,2,,2,,2,,2,Student5,2,,2,,2,,2,,2,1,1,1,1,0,0,0,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+25,Student26,26,F,New Rochelle,Student33,Student83,Student59,Student50,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+26,Student27,27,F,White Plains,Student44,Student83,Student35,Student59,,Student56,2,,2,,2,,2,,2,Student79,1,Student88,1,Student33,1,,1,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,1,0,0,,1,1,1,1,2
+27,Student28,28,M,Riverdale/Bronx/Yonkers,Student39,Student49,Student68,Student6,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+28,Student29,29,F,Riverdale/Bronx/Yonkers,Student61,Student62,Student40,Student59,,,2,,2,,2,,2,,2,Student61,1,,2,,2,,2,,2,0,0,1,0,1,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,1,2,2,2,2
+29,Student30,30,M,Riverdale/Bronx/Yonkers,Student18,Student49,Student39,Student28,,Student84,2,Student66,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,0,0,1,1,1,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+30,Student31,31,M,Riverdale/Bronx/Yonkers,Student39,Student68,Student6,Student28,,Student91,2,Student4,2,Student84,2,,2,,2,Student6,1,Student20,1,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,0,0,0,,1,1,2,2,2
+31,Student32,32,F,Riverdale/Bronx/Yonkers,Student86,Student26,Student75,Student46,,,2,,2,,2,,2,,2,Student75,2,Student86,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,0,0,0,,2,2,2,2,2
+32,Student33,33,F,New Rochelle,Student9,Student61,Student59,Student83,,Student59,1,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+33,Student34,34,F,Riverdale/Bronx/Yonkers,Student12,Student3,Student86,Student17,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+34,Student35,35,F,Riverdale/Bronx/Yonkers,Student63,Student44,Student34,Student27,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+35,Student36,36,F,Scarsdale,Student46,Student26,Student38,Student86,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+36,Student37,37,M,Scarsdale,Student57,Student21,,,,,2,,2,,2,,2,,2,Student57,2,Student21,1,,2,,2,,2,0,1,0,0,1,1,0,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,0,0,0,,2,1,2,2,2
+37,Student38,38,F,Scarsdale,Student26,Student46,Student73,,,Student37,2,,2,,2,,2,,2,Student19,1,Student73,1,,2,,2,,2,1,0,1,1,1,0,0,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,0,0,0,,1,1,2,2,2
+38,Student39,39,M,Riverdale/Bronx/Yonkers,Student28,Student20,Student68,Student6,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+39,Student40,40,F,New Rochelle,Student83,Student23,Student80,,,Student62,2,Student77,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+40,Student41,41,F,New Rochelle,Student5,Student86,Student45,Student73,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+41,Student42,42,M,New Rochelle,Student16,Student55,Student57,Student58,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,0,1,1,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+42,Student43,43,M,Riverdale/Bronx/Yonkers,Student55,Student74,Student82,Student54,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+43,Student44,44,F,White Plains,Student27,Student63,Student35,Student23,,Student77,2,Student2,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+44,Student45,45,F,Other,Student15,Student5,Student86,Student80,,Student15,1,Student73,1,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+45,Student46,46,F,New Rochelle,Student36,Student32,,,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,1,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+46,Student47,47,M,Riverdale/Bronx/Yonkers,Student66,Student64,Student60,Student1,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+47,Student48,48,F,Riverdale/Bronx/Yonkers,Student90,Student27,Student5,Student87,,Student56,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+48,Student49,49,M,White Plains,Student28,Student6,Student39,Student68,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+49,Student50,50,F,New Rochelle,Student83,Student33,Student9,Student83,,,2,,2,,2,,2,,2,Student9,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+50,Student51,51,M,Scarsdale,Student55,Student82,Student8,Student7,,Student7,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+51,Student52,52,M,New Rochelle,Student16,Student7,Student42,Student55,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+52,Student53,53,F,Riverdale/Bronx/Yonkers,Student3,Student35,,,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+53,Student54,54,M,Scarsdale,Student82,Student43,Student55,Student74,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+54,Student55,55,M,New Rochelle,Student54,Student43,Student74,Student82,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+55,Student56,56,F,Riverdale/Bronx/Yonkers,Student83,Student5,Student90,Student65,,Student48,2,Student27,2,,2,,2,,2,Student38,1,Student45,1,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,0,0,0,,1,1,2,2,2
+56,Student57,57,M,New Rochelle,Student39,Student18,Student42,Student74,,Student14,2,Student78,2,,2,,2,,2,Student21,1,,2,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,1,2,2,2,2
+57,Student58,58,M,New Rochelle,Student74,Student82,Student55,Student11,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+58,Student59,59,F,New Rochelle,Student9,Student83,Student62,Student26,,Student33,1,,2,,2,,2,,2,Student9,1,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,1,2,2,2,2
+59,Student60,60,M,Riverdale/Bronx/Yonkers,Student69,Student64,Student47,,,Student84,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+60,Student61,61,F,Riverdale/Bronx/Yonkers,Student62,Student40,Student80,Student29,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+61,Student62,62,F,New Rochelle,Student40,Student83,Student26,Student50,,Student40,1,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+62,Student63,63,M,Riverdale/Bronx/Yonkers,Student35,Student44,Student15,Student88,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+63,Student64,64,M,Riverdale/Bronx/Yonkers,Student69,Student60,Student47,,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+64,Student65,65,M,Riverdale/Bronx/Yonkers,,,,,,Student90,2,,2,,2,,2,,2,Student37,1,Student21,1,Student89,1,Student20,1,,2,0,1,0,0,1,1,0,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,1,1,0,,1,1,1,1,2
+65,Student66,66,M,Riverdale/Bronx/Yonkers,Student47,Student64,Student60,,,Student84,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,1,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+66,Student67,67,M,Manhattan,Student22,Student89,Student18,Student14,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+67,Student68,68,M,Riverdale/Bronx/Yonkers,Student28,Student39,Student49,,,,2,,2,,2,,2,,2,Student28,1,Student6,1,Student49,1,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,1,0,0,,1,1,1,2,2
+68,Student69,69,M,Riverdale/Bronx/Yonkers,Student64,Student39,Student60,Student54,,,1,,1,,1,,1,,1,,1,,1,,1,,1,,1,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,1,1,1,1,1
+69,Student70,70,F,Riverdale/Bronx/Yonkers,,,,,,,1,,1,,1,,1,,1,,1,,1,,1,,1,,1,1,1,1,1,0,0,0,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,1,1,1,1,1
+70,Student71,71,F,Riverdale/Bronx/Yonkers,,,,,,,1,,1,,1,,1,,1,,1,,1,,1,,1,,1,1,1,1,1,0,0,0,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,1,1,1,1,1
+71,Student72,72,M,Manhattan,Student37,,,,,Student14,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+72,Student73,73,F,Manhattan,Student41,Student45,Student86,Student80,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+73,Student74,74,M,Riverdale/Bronx/Yonkers,Student54,Student82,Student60,Student43,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+74,Student75,75,F,Riverdale/Bronx/Yonkers,,,,,,,2,,2,,2,,2,,2,Student86,2,Student32,2,,2,,2,,2,1,1,1,1,0,0,0,1,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,0,0,0,,2,2,2,2,2
+75,Student76,76,F,White Plains,Student79,Student88,Student23,Student87,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+76,Student77,77,F,New Rochelle,,,,,,Student44,2,Student33,2,,2,,2,,2,Student59,2,Student27,1,Student23,2,Student61,2,Student9,1,1,1,1,1,0,0,0,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,1,1,1,1,,2,1,2,2,1
+77,Student78,78,M,Manhattan,Student18,Student7,,,,Student84,2,Student14,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+78,Student79,79,F,Manhattan,Student76,Student87,Student38,Student85,,Student80,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+79,Student80,80,F,Manhattan,Student61,Student62,Student40,Student33,,Student79,2,,2,,2,,2,,2,Student61,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+80,Student81,81,F,Riverdale/Bronx/Yonkers,Student3,Student17,Student15,Student88,,,2,,2,,2,,2,,2,Student3,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+81,Student82,82,M,New Rochelle,Student54,Student74,Student43,Student55,,Student83,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+82,Student83,83,F,New Rochelle,Student59,Student9,Student33,Student62,,Student82,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+83,Student84,84,M,Riverdale/Bronx/Yonkers,,,,,,Student30,2,Student78,2,Student60,2,Student1,2,,2,,2,,2,,2,,2,,2,1,0,1,1,1,0,1,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+84,Student85,85,M,Riverdale/Bronx/Yonkers,Student43,Student74,Student52,Student51,,,2,,2,,2,,2,,2,Student43,2,,2,,2,,2,,2,1,1,1,1,0,0,1,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+85,Student86,86,F,Riverdale/Bronx/Yonkers,Student75,Student32,Student17,Student45,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+86,Student87,87,F,Riverdale/Bronx/Yonkers,Student79,Student13,Student76,Student5,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+87,Student88,88,F,White Plains,Student44,Student81,Student3,Student12,,,2,,2,,2,,2,,2,Student44,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+88,Student89,89,M,Riverdale/Bronx/Yonkers,Student22,Student67,Student39,Student74,,Student90,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,1,1,1,1,0,0,0,3,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
+89,Student90,90,F,Riverdale/Bronx/Yonkers,Student48,Student56,Student5,Student83,,Student89,2,,2,,2,,2,,2,Student48,2,,2,,2,,2,,2,1,1,1,1,0,0,0,2,,,,,,,0,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,1,0,0,0,0,,2,2,2,2,2
+90,Student91,91,M,Riverdale/Bronx/Yonkers,,,,,,,2,,2,,2,,2,,2,,2,,2,,2,,2,,2,0,1,0,0,1,1,0,2,,,,,,,1,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,2,2,2,2,2
