@@ -111,11 +111,12 @@ def f(s, move):
 
 
 def find_max(s, neighbors):
-    fmax = -1
+    best_move = neighbors.pop()
+    best_value = f(s, best_move)
     for move in neighbors:
         v = f(s, move)
-        if fmax < v:
-            fmax = v
+        if best_value < v:
+            best_value = v
             best_move = move
     s1 = deepcopy(s)
     apply(s1, best_move)
@@ -124,6 +125,7 @@ def find_max(s, neighbors):
 
 def tabu_search_sap(n, s, f):
     """
+    Student Assignment Problem
     n students
     s initial partition
     f state evaluation function
