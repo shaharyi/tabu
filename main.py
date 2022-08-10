@@ -1,5 +1,5 @@
+import itertools
 from collections import defaultdict
-from copy import deepcopy
 import numpy as np
 import pandas as pd
 from pyvis.network import Network
@@ -16,9 +16,6 @@ Tabu queue length of 5 was found good.
 
 MIN_PER_LOCATION = 4
 
-# random accademic abilities data
-c = np.random.rand(91, 4)
-
 # extra data calculated from raw data
 edata = {}
 
@@ -32,7 +29,8 @@ def g(s):
     each student has r characteristics
     c[i,j] = student i, ability j
     """
-    global c
+    # random accademic abilities data
+    c = np.random.rand(91, 4)
     # max in each row
     cj = np.amax(c, axis=1)
     return min(cj) * sum(cj)
@@ -43,9 +41,8 @@ def gender_score(s):
     global data
     g = data['Gender']
     sum_dev = 0
-    for c in s:
-        c = np.array(list(c))
-        sum_dev += abs(sum(g[c] == 'M') / c.size - 0.5)
+    for index, group in data.iterrows():
+        sum_dev += abs(sum(g[group] == 'M') / group.size - 0.5)
     avg_dev = sum_dev / len(s)
     return 1 - avg_dev / 0.5
 
@@ -58,10 +55,12 @@ def locations():
 def location_score(s):
     all_locations = data['Location']
     vc = pd.value_counts(all_locations)
-    per_class = [pd.value_counts(all_locations[x]) for x in s]
-    pc = pd.DataFrame(per_class)
-    num_classes = len(s)
-    target = vc.map(lambda x: max(x / num_classes, MIN_PER_LOCATION))
+    per_group = []
+    for index, group in data.iterrows():
+        per_group += [pd.value_counts(all_locations[group])]
+    pc = pd.DataFrame(per_group)
+    num_groups = len(s)
+    target = vc.map(lambda x: max(x / num_groups, MIN_PER_LOCATION))
     above = pc - target
     bad = above[above > 0].sum().sum()
     below = pc[pc < MIN_PER_LOCATION]
@@ -69,26 +68,42 @@ def location_score(s):
     return -bad
 
 
-def friend_foe_score(s):
+def friend_enemy_score(s):
     global data
-    friend = data.filter(items=[f'Friend{x}' for x in (1, 2, 3)])
-    foe = data.filter(items=[f'Enemy{x}' for x in (1, 2, 3)])
-
-    return 0
+    cols = itertools.product(('Friend', 'Enemy'), '123')
+    cols = list(map(''.join, cols))
+    # avoid np.NaN since replace makes it float
+    data.fillna({x: 'NA' for x in cols}, inplace=True)
+    lookup = data.set_index('Student Name')['No']
+    lookup['NA'] = -1
+    data.replace({c: lookup for c in cols}, inplace=True)
+    s_back = {n: i for i, x in enumerate(s) for n in x}
+    # now replace each student id with her group id
+    data.replace({c: s_back for c in cols}, inplace=True)
+    # add student own group id
+    b = pd.Series(s_back)
+    data['Group'] = b
+    score = [len(data[data[x] == data['Group']]) for x in cols]
+    return sum(score[:3]) - sum(score[3:])
 
 
 def behavior_score(s):
-    return 0
+    global data
+    s.replace(data.TroubleMaker, inplace=True)
+    t = s.sum(axis=1)
+    return -t.var()
 
 
 def inclusion_score(s):
+    num_groups = len(s)
+    cols = [f'Class {x} OK' for x in range(1, num_groups + 1)]
     return 0
 
 
 def f(s):
     gs = gender_score(s)
     ls = location_score(s)
-    fs = friend_foe_score(s)
+    fs = friend_enemy_score(s)
     bs = behavior_score(s)
     ns = inclusion_score(s)
     return 0.8 * gs + ls + 0.5 * fs + bs + ns
@@ -122,7 +137,7 @@ def find_max(s, neighbors):
         if best_value < v:
             best_value = v
             best_move = move
-    s1 = deepcopy(s)
+    s1 = s.copy()
     apply(s1, best_move)
     return s1, best_move
 
@@ -139,7 +154,7 @@ def tabu_search_sap(n, s, f):
     k = list(map(len, s))
     m = len(k)
     # INITIALIZE
-    sbest = deepcopy(s)
+    sbest = s.copy()
     tc = 0
     tcbest = tc
     # defaults to non-tabu timestamp
@@ -162,7 +177,7 @@ def tabu_search_sap(n, s, f):
         smax, best_move = find_max(s, neighbors)
         # TEST
         if f(smax) > f(sbest):
-            sbest = deepcopy(smax)
+            sbest = smax.copy()
             tcbest = tc
         # UPDATE
         x, y = best_move[0][1], best_move[1][1]
@@ -172,7 +187,7 @@ def tabu_search_sap(n, s, f):
     return sbest
 
 
-def tabu(filename, nclasses):
+def tabu(filename, num_groups):
     global data
     # YOU MUST PUT sheet_name=None TO READ ALL CSV FILES IN YOUR XLSM FILE
     data = pd.read_excel(filename, sheet_name='StudentInfo', skiprows=3)
@@ -180,8 +195,8 @@ def tabu(filename, nclasses):
     print(data.keys())
     s = np.arange(n)
     np.random.shuffle(s)
-    s = np.array_split(s, nclasses)
-    s = list(map(set, s))
+    s = np.array_split(s, num_groups)
+    s = pd.DataFrame(map(set, s))
     return tabu_search_sap(n, s, f)
 
 
