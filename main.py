@@ -1,3 +1,4 @@
+from copy import deepcopy
 import itertools
 from collections import defaultdict
 import numpy as np
@@ -41,8 +42,9 @@ def gender_score(s):
     global data
     g = data['Gender']
     sum_dev = 0
-    for index, group in data.iterrows():
-        sum_dev += abs(sum(g[group] == 'M') / group.size - 0.5)
+    for c in s:
+        c = np.array(list(c))
+        sum_dev += abs(sum(g[c] == 'M') / c.size - 0.5)
     avg_dev = sum_dev / len(s)
     return 1 - avg_dev / 0.5
 
@@ -55,12 +57,10 @@ def locations():
 def location_score(s):
     all_locations = data['Location']
     vc = pd.value_counts(all_locations)
-    per_group = []
-    for index, group in data.iterrows():
-        per_group += [pd.value_counts(all_locations[group])]
-    pc = pd.DataFrame(per_group)
-    num_groups = len(s)
-    target = vc.map(lambda x: max(x / num_groups, MIN_PER_LOCATION))
+    per_class = [pd.value_counts(all_locations[x]) for x in s]
+    pc = pd.DataFrame(per_class)
+    num_classes = len(s)
+    target = vc.map(lambda x: max(x / num_classes, MIN_PER_LOCATION))
     above = pc - target
     bad = above[above > 0].sum().sum()
     below = pc[pc < MIN_PER_LOCATION]
@@ -89,6 +89,7 @@ def friend_enemy_score(s):
 
 def behavior_score(s):
     global data
+    s = pd.DataFrame(s)
     s.replace(data.TroubleMaker, inplace=True)
     t = s.sum(axis=1)
     return -t.var()
@@ -137,7 +138,7 @@ def find_max(s, neighbors):
         if best_value < v:
             best_value = v
             best_move = move
-    s1 = s.copy()
+    s1 = deepcopy(s)
     apply(s1, best_move)
     return s1, best_move
 
@@ -154,7 +155,7 @@ def tabu_search_sap(n, s, f):
     k = list(map(len, s))
     m = len(k)
     # INITIALIZE
-    sbest = s.copy()
+    sbest = deepcopy(s)
     tc = 0
     tcbest = tc
     # defaults to non-tabu timestamp
@@ -177,7 +178,7 @@ def tabu_search_sap(n, s, f):
         smax, best_move = find_max(s, neighbors)
         # TEST
         if f(smax) > f(sbest):
-            sbest = smax.copy()
+            sbest = deepcopy(smax)
             tcbest = tc
         # UPDATE
         x, y = best_move[0][1], best_move[1][1]
@@ -196,7 +197,7 @@ def tabu(filename, num_groups):
     s = np.arange(n)
     np.random.shuffle(s)
     s = np.array_split(s, num_groups)
-    s = pd.DataFrame(map(set, s))
+    s = list(map(set, s))
     return tabu_search_sap(n, s, f)
 
 
