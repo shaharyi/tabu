@@ -41,12 +41,11 @@ def gender_score(s):
     """return score in [0,1] where 1 is equal parts, 0 is homogenous"""
     global data
     g = data['Gender']
-    sum_dev = 0
-    for c in s:
-        c = np.array(list(c))
-        sum_dev += abs(sum(g[c] == 'M') / c.size - 0.5)
-    avg_dev = sum_dev / len(s)
-    return 1 - avg_dev / 0.5
+    s = pd.DataFrame(s)
+    s.replace(g, inplace=True)
+    s.replace({'M': -1, 'F': 1}, inplace=True)
+    index = s.mean(axis=1).abs().mean()
+    return 1 - index
 
 
 def locations():
@@ -55,9 +54,15 @@ def locations():
 
 
 def location_score(s):
+    """
+    return How many students are not according to location constraint.
+    That is, distributed evenly, but 4 and above from each location, zeros allowed.
+    :param s:
+    :return:
+    """
     all_locations = data['Location']
     vc = pd.value_counts(all_locations)
-    per_class = [pd.value_counts(all_locations[x]) for x in s]
+    per_class = [pd.value_counts(all_locations[list(x)]) for x in s]
     pc = pd.DataFrame(per_class)
     num_classes = len(s)
     target = vc.map(lambda x: max(x / num_classes, MIN_PER_LOCATION))
@@ -69,6 +74,11 @@ def location_score(s):
 
 
 def friend_enemy_score(s):
+    """
+    :param s: Current division to groups
+    :return:
+    How many friend and enemy requests not satistfied
+    """
     global data
     cols = itertools.product(('Friend', 'Enemy'), '123')
     cols = list(map(''.join, cols))
@@ -88,6 +98,13 @@ def friend_enemy_score(s):
 
 
 def behavior_score(s):
+    """
+    :param s:
+    :return:
+    Value in range [0,1]
+    where 1 is perfect even distribution of TroubleMakers
+    and 0 is for most unbalanced distribution.
+    """
     global data
     s = pd.DataFrame(s)
     s.replace(data.TroubleMaker, inplace=True)
@@ -96,6 +113,11 @@ def behavior_score(s):
 
 
 def inclusion_score(s):
+    """
+    :param s:
+    :return:
+    How many students are assigned not in a suitable group.
+    """
     num_groups = len(s)
     cols = [f'Class {x} OK' for x in range(1, num_groups + 1)]
     s_back = {n: i for i, x in enumerate(s) for n in x}
@@ -114,23 +136,24 @@ def f(s):
     fs = friend_enemy_score(s)
     bs = behavior_score(s)
     ns = inclusion_score(s)
-    return 0.8 * gs + ls + 0.5 * fs + bs + ns
+    return 10 * gs + ls + 0.5 * fs + bs + ns
 
 
 def apply(s, move):
-    [(i, x), (j, y)] = move
-    s[i].remove(x)
-    s[i].add(y)
-    s[j].remove(y)
-    s[j].add(x)
+    [(i, x, ix), (j, y, iy)] = move
+    t = s[i][ix]
+    s[i][ix] = s[j][iy]
+    s[j][iy] = t
 
 
 def undo(s, move):
-    [(i, x), (j, y)] = move
-    apply(s, [(i, y), (j, x)])
+    [(i, x, ix), (j, y, iy)] = move
+    t = s[j][iy]
+    s[j][iy] = s[i][ix]
+    s[i][ix] = t
 
 
-def f(s, move):
+def f2(s, move):
     apply(s, move)
     v = f(s)
     undo(s, move)
@@ -139,9 +162,9 @@ def f(s, move):
 
 def find_max(s, neighbors):
     best_move = neighbors.pop()
-    best_value = f(s, best_move)
+    best_value = f2(s, best_move)
     for move in neighbors:
-        v = f(s, move)
+        v = f2(s, move)
         if best_value < v:
             best_value = v
             best_move = move
@@ -168,19 +191,23 @@ def tabu_search_sap(n, s, f):
     # defaults to non-tabu timestamp
     t = defaultdict(lambda: tc - delta)
     # STOP after X iterations
-    while tc - tcbest > 20:
+    while tc - tcbest < 20:
         # GENERATE
         neighbors = []
+        fbest = f(sbest)
+        cc = 0
         for i in range(m):
-            for j in range(m):
-                if i != j:
-                    for x in s[i]:
-                        for y in s[j]:
-                            move = [(i, x), (j, y)]
-                            tabu = tc - t[x] < delta or tc - t[y] < delta
-                            asp = f(s, move) > f(sbest)
-                            if not tabu or asp:
-                                neighbors += move
+            for j in range(i + 1, m):
+                for ix, x in enumerate(s[i]):
+                    print(cc, i, j)
+                    for iy, y in enumerate(s[j]):
+                        cc += 1
+                        move = [(i, x, ix), (j, y, iy)]
+                        tabu = tc - t[x] < delta or tc - t[y] < delta
+                        asp = f2(s, move) > fbest
+                        if not tabu or asp:
+                            neighbors += [move]
+        print('neighbors len=%d' % len(neighbors))
         # SELECT
         smax, best_move = find_max(s, neighbors)
         # TEST
@@ -198,20 +225,18 @@ def tabu_search_sap(n, s, f):
 def tabu(filename, num_groups):
     global data
     # YOU MUST PUT sheet_name=None TO READ ALL CSV FILES IN YOUR XLSM FILE
-    data = pd.read_excel(filename, sheet_name='StudentInfo', skiprows=3)
+    # data = pd.read_excel(filename, sheet_name='StudentInfo', skiprows=3)
+    data = pd.read_csv('demo.csv')
     n = data.values.shape[0]
     print(data.keys())
     s = np.arange(n)
     np.random.shuffle(s)
     s = np.array_split(s, num_groups)
-    s = list(map(set, s))
+    s = list(map(list, s))
     return tabu_search_sap(n, s, f)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    tabu('demo.xlsm', 4)
-
+def show_graph():
     net = Network()
     nx_graph = nx.cycle_graph(10)
     nx_graph.nodes[1]['title'] = 'Number 1'
@@ -226,3 +251,8 @@ if __name__ == '__main__':
     # populates the nodes and edges data structures
     nt.from_nx(nx_graph)
     nt.show('nx.html')
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    tabu('demo.xlsm', 4)
