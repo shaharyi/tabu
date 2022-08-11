@@ -18,7 +18,7 @@ Tabu queue length of 5 was found good.
 MIN_PER_LOCATION = 4
 
 # extra data calculated from raw data
-edata = {}
+data2 = {}
 
 # raw data from input file
 data = None
@@ -50,8 +50,8 @@ def gender_score(s):
 
 
 def locations():
-    global data, edata
-    return edata.setdefault('locations', data['Location'].unique())
+    global data, data2
+    return data2.setdefault('locations', data['Location'].unique())
 
 
 def location_score(s):
@@ -98,7 +98,14 @@ def behavior_score(s):
 def inclusion_score(s):
     num_groups = len(s)
     cols = [f'Class {x} OK' for x in range(1, num_groups + 1)]
-    return 0
+    s_back = {n: i for i, x in enumerate(s) for n in x}
+    data['Group'] = pd.Series(s_back)
+
+    def bad(x):
+        return (data[cols[x]] == 0) & (data.Group == x)
+
+    bad_rows = [data.loc[bad(x)] for x in range(num_groups)]
+    return -sum(map(len, bad_rows))
 
 
 def f(s):
