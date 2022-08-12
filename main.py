@@ -147,10 +147,7 @@ def apply(s, move):
 
 
 def undo(s, move):
-    [(i, x, ix), (j, y, iy)] = move
-    t = s[j][iy]
-    s[j][iy] = s[i][ix]
-    s[i][ix] = t
+    apply(s, move)
 
 
 def f2(s, move):
@@ -190,12 +187,12 @@ def tabu_search_sap(n, s, f):
     tcbest = tc
     # defaults to non-tabu timestamp
     t = defaultdict(lambda: tc - delta)
+    fbest = f(sbest)
     # STOP after X iterations
     while tc - tcbest < 20:
-        # GENERATE
-        neighbors = []
-        fbest = f(sbest)
+        # GENERATE and SELECT best
         cc = 0
+        fmax = None
         for i in range(m):
             for j in range(i + 1, m):
                 for ix, x in enumerate(s[i]):
@@ -204,14 +201,17 @@ def tabu_search_sap(n, s, f):
                         cc += 1
                         move = [(i, x, ix), (j, y, iy)]
                         tabu = tc - t[x] < delta or tc - t[y] < delta
-                        asp = f2(s, move) > fbest
+                        apply(s, move)
+                        fmove = f(s)
+                        asp = fmove > fbest
                         if not tabu or asp:
-                            neighbors += [move]
-        print('neighbors len=%d' % len(neighbors))
-        # SELECT
-        smax, best_move = find_max(s, neighbors)
+                            if fmax == None or fmax < fmove:
+                                smax = deepcopy(s)
+                                fmax = fmove
+                                best_move = move
+                        undo(s, move)
         # TEST
-        if f(smax) > f(sbest):
+        if fmax > fbest:
             sbest = deepcopy(smax)
             tcbest = tc
         # UPDATE
@@ -255,4 +255,5 @@ def show_graph():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    tabu('demo.xlsm', 4)
+    s = tabu('demo.xlsm', 4)
+    print(s)
