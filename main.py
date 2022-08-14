@@ -267,7 +267,7 @@ def show_graph(s):
     n = sum(map(len, s))
     m = len(s)
     # Add a hidden gravity center node per group
-    [nt.add_node(1001 + i, hidden=False, mass=0.01, title=f'Group{i}') for i in range(m)]
+    [nt.add_node(1001 + i, hidden=False, mass=0.1, title=f'Group{i}') for i in range(m)]
     # populates the nodes and edges data structures
     # https: // github.com / visjs / vis - network / blob / master / lib / network / modules / Groups.js
     colors = ['blue', 'yellow', 'red', 'green', 'magenta', 'purple', 'orange', 'darkblue', 'pink']
