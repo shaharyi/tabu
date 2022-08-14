@@ -1,6 +1,9 @@
+import sys
 from multiprocessing import Pool, TimeoutError
 from copy import deepcopy
 import itertools
+import functools
+from operator import itemgetter
 from collections import defaultdict
 import numpy as np
 import pandas as pd
@@ -157,7 +160,36 @@ def undo(s, move):
     apply(s, move)
 
 
-def tabu_search_sap(n, s, f):
+def scan(s, tc, t, delta, fbest, pair):
+    f = eval_func
+    i, j = pair
+    cc = 0
+    fmax = None
+    for ix, x in enumerate(s[i]):
+        print(cc, i, j)
+        for iy, y in enumerate(s[j]):
+            cc += 1
+            move = [(i, x, ix), (j, y, iy)]
+            tx = t.get(x, tc - delta)
+            ty = t.get(y, tc - delta)
+            tabu = tc - tx < delta or tc - ty < delta
+            apply(s, move)
+            fmove = f(s)
+            asp = fmove > fbest
+            if not tabu or asp:
+                if fmax == None or fmax < fmove:
+                    smax = deepcopy(s)
+                    fmax = fmove
+                    best_move = move
+            undo(s, move)
+    return fmax, smax, best_move
+
+
+def scan2(x, y):
+    return y[x]
+
+
+def tabu_search_sap(n, s):
     """
     Student Assignment Problem
     n students
@@ -173,30 +205,18 @@ def tabu_search_sap(n, s, f):
     tc = 0
     tcbest = tc
     # defaults to non-tabu timestamp
-    t = defaultdict(lambda: tc - delta)
-    fbest = f(sbest)
+    t = {}
+    fbest = eval_func(sbest)
     # STOP after X iterations
     while tc - tcbest < 20:
         # GENERATE and SELECT best
-        cc = 0
-        fmax = None
-        for i in range(m):
-            for j in range(i + 1, m):
-                for ix, x in enumerate(s[i]):
-                    print(cc, i, j)
-                    for iy, y in enumerate(s[j]):
-                        cc += 1
-                        move = [(i, x, ix), (j, y, iy)]
-                        tabu = tc - t[x] < delta or tc - t[y] < delta
-                        apply(s, move)
-                        fmove = f(s)
-                        asp = fmove > fbest
-                        if not tabu or asp:
-                            if fmax == None or fmax < fmove:
-                                smax = deepcopy(s)
-                                fmax = fmove
-                                best_move = move
-                        undo(s, move)
+        pairs = itertools.combinations(range(m), 2)
+        print(list(pairs))
+        pairs = itertools.combinations(range(m), 2)
+        with Pool(processes=m) as pool:
+            results = pool.map(functools.partial(scan, s, tc, t, delta, fbest), pairs)
+        fmax, smax, best_move = max(results, key=itemgetter(0))
+        print(fmax, smax, best_move)
         # TEST
         if fmax > fbest:
             sbest = deepcopy(smax)
@@ -220,7 +240,7 @@ def tabu(filename, num_groups):
     np.random.shuffle(s)
     s = np.array_split(s, num_groups)
     s = list(map(list, s))
-    return tabu_search_sap(n, s, eval_func)
+    return tabu_search_sap(n, s)
 
 
 def show_graph():
