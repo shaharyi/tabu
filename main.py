@@ -150,26 +150,6 @@ def undo(s, move):
     apply(s, move)
 
 
-def f2(s, move):
-    apply(s, move)
-    v = f(s)
-    undo(s, move)
-    return v
-
-
-def find_max(s, neighbors):
-    best_move = neighbors.pop()
-    best_value = f2(s, best_move)
-    for move in neighbors:
-        v = f2(s, move)
-        if best_value < v:
-            best_value = v
-            best_move = move
-    s1 = deepcopy(s)
-    apply(s1, best_move)
-    return s1, best_move
-
-
 def tabu_search_sap(n, s, f):
     """
     Student Assignment Problem
