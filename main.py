@@ -268,3 +268,5 @@ def show_graph():
 if __name__ == '__main__':
     state = tabu('demo.xlsm', 4)
     print(state)
+    with open('output', 'wt') as f:
+        f.write(state)
