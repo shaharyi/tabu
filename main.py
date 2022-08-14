@@ -1,3 +1,4 @@
+import sys
 from multiprocessing import Pool
 from copy import deepcopy
 import itertools
@@ -6,7 +7,8 @@ from operator import itemgetter
 import numpy as np
 import pandas as pd
 from pyvis.network import Network
-import networkx as nx
+
+# import networkx as nx
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
@@ -77,6 +79,18 @@ def location_score(s):
     return -bad
 
 
+def fe_cols():
+    global data
+    cols = itertools.product(('Friend', 'Enemy'), '123')
+    cols = list(map(''.join, cols))
+    # avoid np.NaN since replace makes it float
+    data.fillna({x: 'NA' for x in cols}, inplace=True)
+    lookup = data.set_index('Student Name')['No']
+    lookup['NA'] = -1
+    data.replace({c: lookup for c in cols}, inplace=True)
+    return cols
+
+
 def friend_enemy_score(s):
     """
     :param s: Current division to groups
@@ -84,19 +98,11 @@ def friend_enemy_score(s):
     How many friend and enemy requests not satistfied
     """
     global data, data2, s2
-    cols = data2.get('fe_cols')
-    if not cols:
-        cols = itertools.product(('Friend', 'Enemy'), '123')
-        cols = list(map(''.join, cols))
-        data2['fe_cols'] = cols
-        # avoid np.NaN since replace makes it float
-        data.fillna({x: 'NA' for x in cols}, inplace=True)
-        lookup = data.set_index('Student Name')['No']
-        lookup['NA'] = -1
-        data.replace({c: lookup for c in cols}, inplace=True)
+    cols = data2.setdefault('fe_cols', fe_cols())
+    cols_groups = [f'{c}_group' for c in cols]
     s_back = s2.setdefault('s_back', {n: i for i, x in enumerate(s) for n in x})
     # now replace each student id with her group id
-    data.replace({c: s_back for c in cols}, inplace=True)
+    data[cols_groups] = data.replace({c: s_back for c in cols})[cols]
     # add student own group id
     data['Group'] = pd.Series(s_back)
     score = [len(data[data[x] == data['Group']]) for x in cols]
@@ -211,6 +217,7 @@ def tabu_search_sap(n, s):
     tcbest = tc
     t = {}
     fbest = eval_func(sbest)
+    show_graph(s)
     # STOP after X iterations
     while tc - tcbest < 20:
         # GENERATE and SELECT best
@@ -230,6 +237,7 @@ def tabu_search_sap(n, s):
         t[x] = t[y] = tc
         tc += 1
         s = smax
+        show_graph(s)
     return sbest
 
 
@@ -244,23 +252,35 @@ def tabu(filename, num_groups):
     np.random.shuffle(s)
     s = np.array_split(s, num_groups)
     s = list(map(list, s))
+    show_graph(s)
+    sys.exit(1)
     return tabu_search_sap(n, s)
 
 
-def show_graph():
-    net = Network()
-    nx_graph = nx.cycle_graph(10)
-    nx_graph.nodes[1]['title'] = 'Number 1'
-    nx_graph.nodes[1]['group'] = 1
-    nx_graph.nodes[3]['title'] = 'I belong to a different group!'
-    nx_graph.nodes[3]['group'] = 10
-    nx_graph.add_node(20, size=20, title='couple', group=2)
-    nx_graph.add_node(21, size=15, title='couple', group=2)
-    nx_graph.add_edge(20, 21, weight=5)
-    nx_graph.add_node(25, size=25, label='lonely', title='lonely node', group=3)
-    nt = Network('500px', '500px')
+def show_graph(s):
+    # Enrich data with Group
+    # and replace Friends name with their id
+    friend_enemy_score(s)
+    nt = Network(height='750px', width='100%', bgcolor='#222222', font_color='white')
+    # set the physics layout of the network
+    nt.barnes_hut()
+    n = sum(map(len, s))
+    m = len(s)
+    # Add a hidden gravity center node per group
+    [nt.add_node(1001 + i, hidden=False, mass=0.01, title=f'Group{i}') for i in range(m)]
     # populates the nodes and edges data structures
-    nt.from_nx(nx_graph)
+    # https: // github.com / visjs / vis - network / blob / master / lib / network / modules / Groups.js
+    colors = ['blue', 'yellow', 'red', 'green', 'magenta', 'purple', 'orange', 'darkblue', 'pink']
+    nt.add_nodes(data['No'], title=data['Student Name'], color=data['Group'].replace(range(m), colors[:m]))
+    [n.update({'mass': 1}) for n in nt.nodes if n['id'] < 1000]
+    # [nt.add_node(i, title=data['Student Name'].iloc[i], group=data['Group'].iloc[i]) for i in range(n)]
+    edges = zip(data['No'], 1001 + data['Group'])
+    nt.add_edges(edges)
+    sources = data['No']
+    for i in '123':
+        targets = data[f'Friend{i}'].drop(data[data[f'Friend{i}'] == -1].index)
+        edge = zip(sources, targets)
+        nt.add_edges(edge)
     nt.show('nx.html')
 
 
