@@ -1,10 +1,8 @@
-import sys
-from multiprocessing import Pool, TimeoutError
+from multiprocessing import Pool
 from copy import deepcopy
 import itertools
 import functools
 from operator import itemgetter
-from collections import defaultdict
 import numpy as np
 import pandas as pd
 from pyvis.network import Network
@@ -161,6 +159,16 @@ def undo(s, move):
 
 
 def scan(s, tc, t, delta, fbest, pair):
+    """
+    Scan 2 groups for best swap
+    :param s:
+    :param tc:
+    :param t:
+    :param delta:
+    :param fbest:
+    :param pair:
+    :return:
+    """
     f = eval_func
     i, j = pair
     cc = 0
