@@ -170,6 +170,7 @@ def scan(s, tc, t, delta, fbest, pair):
         for iy, y in enumerate(s[j]):
             cc += 1
             move = [(i, x, ix), (j, y, iy)]
+            # defaults to non-tabu timestamp
             tx = t.get(x, tc - delta)
             ty = t.get(y, tc - delta)
             tabu = tc - tx < delta or tc - ty < delta
@@ -183,10 +184,6 @@ def scan(s, tc, t, delta, fbest, pair):
                     best_move = move
             undo(s, move)
     return fmax, smax, best_move
-
-
-def scan2(x, y):
-    return y[x]
 
 
 def tabu_search_sap(n, s):
@@ -204,7 +201,6 @@ def tabu_search_sap(n, s):
     sbest = deepcopy(s)
     tc = 0
     tcbest = tc
-    # defaults to non-tabu timestamp
     t = {}
     fbest = eval_func(sbest)
     # STOP after X iterations
