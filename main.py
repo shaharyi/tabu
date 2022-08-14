@@ -1,3 +1,4 @@
+from multiprocessing import Pool, TimeoutError
 from copy import deepcopy
 import itertools
 from collections import defaultdict
@@ -19,6 +20,8 @@ MIN_PER_LOCATION = 4
 
 # extra data calculated from raw data
 data2 = {}
+# cache of values calculated from s
+s2 = {}
 
 # raw data from input file
 data = None
@@ -79,20 +82,22 @@ def friend_enemy_score(s):
     :return:
     How many friend and enemy requests not satistfied
     """
-    global data
-    cols = itertools.product(('Friend', 'Enemy'), '123')
-    cols = list(map(''.join, cols))
-    # avoid np.NaN since replace makes it float
-    data.fillna({x: 'NA' for x in cols}, inplace=True)
-    lookup = data.set_index('Student Name')['No']
-    lookup['NA'] = -1
-    data.replace({c: lookup for c in cols}, inplace=True)
-    s_back = {n: i for i, x in enumerate(s) for n in x}
+    global data, data2, s2
+    cols = data2.get('fe_cols')
+    if not cols:
+        cols = itertools.product(('Friend', 'Enemy'), '123')
+        cols = list(map(''.join, cols))
+        data2['fe_cols'] = cols
+        # avoid np.NaN since replace makes it float
+        data.fillna({x: 'NA' for x in cols}, inplace=True)
+        lookup = data.set_index('Student Name')['No']
+        lookup['NA'] = -1
+        data.replace({c: lookup for c in cols}, inplace=True)
+    s_back = s2.setdefault('s_back', {n: i for i, x in enumerate(s) for n in x})
     # now replace each student id with her group id
     data.replace({c: s_back for c in cols}, inplace=True)
     # add student own group id
-    b = pd.Series(s_back)
-    data['Group'] = b
+    data['Group'] = pd.Series(s_back)
     score = [len(data[data[x] == data['Group']]) for x in cols]
     return sum(score[:3]) - sum(score[3:])
 
@@ -120,7 +125,7 @@ def inclusion_score(s):
     """
     num_groups = len(s)
     cols = [f'Class {x} OK' for x in range(1, num_groups + 1)]
-    s_back = {n: i for i, x in enumerate(s) for n in x}
+    s_back = s2.setdefault('s_back', {n: i for i, x in enumerate(s) for n in x})
     data['Group'] = pd.Series(s_back)
 
     def bad(x):
@@ -130,7 +135,9 @@ def inclusion_score(s):
     return -sum(map(len, bad_rows))
 
 
-def f(s):
+def eval_func(s):
+    global s2  # cache of values calculated from s
+    s2 = {}
     gs = gender_score(s)
     ls = location_score(s)
     fs = friend_enemy_score(s)
@@ -213,7 +220,7 @@ def tabu(filename, num_groups):
     np.random.shuffle(s)
     s = np.array_split(s, num_groups)
     s = list(map(list, s))
-    return tabu_search_sap(n, s, f)
+    return tabu_search_sap(n, s, eval_func)
 
 
 def show_graph():
@@ -235,5 +242,5 @@ def show_graph():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    s = tabu('demo.xlsm', 4)
-    print(s)
+    state = tabu('demo.xlsm', 4)
+    print(state)
