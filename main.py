@@ -1,6 +1,4 @@
-import pdb
-import sys
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 from copy import deepcopy
 import itertools
 import functools
@@ -220,7 +218,7 @@ def tabu_search_sap(n, s):
     fbest = eval_func(sbest)
     print(fbest)
     show_graph(s)
-    cores = multiprocessing.cpu_count()
+    cores = cpu_count()
     # STOP after X iterations
     while tc - tcbest < 20:
         # GENERATE and SELECT best
