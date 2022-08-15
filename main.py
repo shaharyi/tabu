@@ -1,3 +1,4 @@
+import pdb
 import sys
 from multiprocessing import Pool
 from copy import deepcopy
@@ -218,13 +219,14 @@ def tabu_search_sap(n, s):
     t = {}
     fbest = eval_func(sbest)
     show_graph(s)
+    cores = multiprocessing.cpu_count()
     # STOP after X iterations
     while tc - tcbest < 20:
         # GENERATE and SELECT best
         pairs = itertools.combinations(range(m), 2)
         print(list(pairs))
         pairs = itertools.combinations(range(m), 2)
-        with Pool(processes=m) as pool:
+        with Pool(processes=cores) as pool:
             results = pool.map(functools.partial(scan, s, tc, t, delta, fbest), pairs)
         fmax, smax, best_move = max(results, key=itemgetter(0))
         print(fmax, smax, best_move)
@@ -252,35 +254,44 @@ def tabu(filename, num_groups):
     np.random.shuffle(s)
     s = np.array_split(s, num_groups)
     s = list(map(list, s))
-    show_graph(s)
-    sys.exit(1)
     return tabu_search_sap(n, s)
 
 
 def show_graph(s):
+    colors = ['blue', 'orange', 'magenta', 'green', 'pink', 'purple', 'yellow', 'darkblue', 'red']
     # Enrich data with Group
     # and replace Friends name with their id
     friend_enemy_score(s)
-    nt = Network(height='750px', width='100%', bgcolor='#222222', font_color='white')
+    nt = Network(height='750px', width='100%', bgcolor='#222222', font_color='white', directed=True)
+    nt.set_edge_smooth('dynamic')
+    nt.options.edges.smooth.enabled = False
     # set the physics layout of the network
-    nt.barnes_hut()
+    # nt.barnes_hut(gravity=-20000, central_gravity=0.3, spring_length=250, spring_strength=0.001, damping=0.09)
     n = sum(map(len, s))
     m = len(s)
-    # Add a hidden gravity center node per group
-    [nt.add_node(1001 + i, hidden=False, mass=0.1, title=f'Group{i}') for i in range(m)]
+    ROWS = int(m ** .5 + .5)
+    # Add a gravity center node per group
+    [nt.add_node(1001 + i, hidden=False, value=10, mass=1, shape='circle', label=f'Group{i+1}',
+                 color=colors[i], physics=False,
+                 x=400 * (i % ROWS), y=400 * (i // ROWS)) for i in range(m)]
+
     # populates the nodes and edges data structures
     # https: // github.com / visjs / vis - network / blob / master / lib / network / modules / Groups.js
-    colors = ['blue', 'yellow', 'red', 'green', 'magenta', 'purple', 'orange', 'darkblue', 'pink']
-    nt.add_nodes(data['No'], title=data['Student Name'], color=data['Group'].replace(range(m), colors[:m]))
+    nt.add_nodes(data['No'],
+                 title=data['Student Name'],
+                 color=data['Group'].replace(range(m), colors[:m]),
+                 value=n * [1])
     [n.update({'mass': 1}) for n in nt.nodes if n['id'] < 1000]
     # [nt.add_node(i, title=data['Student Name'].iloc[i], group=data['Group'].iloc[i]) for i in range(n)]
     edges = zip(data['No'], 1001 + data['Group'])
-    nt.add_edges(edges)
+    [nt.add_edge(s, t, hidden=True) for s, t in edges]
+    # nt.add_edges(edges)
     sources = data['No']
     for i in '123':
         targets = data[f'Friend{i}'].drop(data[data[f'Friend{i}'] == -1].index)
-        edge = zip(sources, targets)
-        nt.add_edges(edge)
+        edges = zip(sources, targets)
+        [nt.add_edge(s, t, physics=False) for s, t in edges]
+    ## nt.add_edges(edges)
     nt.show('nx.html')
 
 
