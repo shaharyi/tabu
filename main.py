@@ -218,6 +218,7 @@ def tabu_search_sap(n, s):
     tcbest = tc
     t = {}
     fbest = eval_func(sbest)
+    print(fbest)
     show_graph(s)
     cores = multiprocessing.cpu_count()
     # STOP after X iterations
