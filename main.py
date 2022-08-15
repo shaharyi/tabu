@@ -287,9 +287,14 @@ def show_graph(s):
     # nt.add_edges(edges)
     sources = data['No']
     for i in '123':
+        # Friends
         targets = data[f'Friend{i}'].drop(data[data[f'Friend{i}'] == -1].index)
         edges = zip(sources, targets)
-        [nt.add_edge(s, t, physics=False) for s, t in edges]
+        [nt.add_edge(s, t, physics=False, color='green') for s, t in edges]
+        # Enemies
+        targets = data[f'Enemy{i}'].drop(data[data[f'Enemy{i}'] == -1].index)
+        edges = zip(sources, targets)
+        [nt.add_edge(s, t, physics=False, color='red') for s, t in edges]
     ## nt.add_edges(edges)
     nt.show('nx.html')
 
